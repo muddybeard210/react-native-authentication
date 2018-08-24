@@ -6,7 +6,7 @@ import axios from "axios";
 const ROOT_URL =
   "https://us-central1-reactnative-one-time-password.cloudfunctions.net";
 
-class SignUpForm extends Component {
+class SignInForm extends Component {
   state = {
     phone: ""
   };
@@ -53,4 +53,4 @@ class SignUpForm extends Component {
   }
 }
 
-export default SignUpForm;
+export default SignInForm;
