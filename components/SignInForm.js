@@ -8,29 +8,17 @@ const ROOT_URL =
 
 class SignInForm extends Component {
   state = {
-    phone: ""
+    phone: "",
+    code: ""
   };
 
-  //No Async Await Added
-  //   handleSubmit = () => {
-  //     axios
-  //       .post(`${ROOT_URL}/createUser`, {
-  //         phone: this.state.phone
-  //       })
-  //       .then(() => {
-  //         axios.post(`${ROOT_URL}/requestOneTimePassword`, {
-  //           phone: this.state.phone
-  //         });
-  //       });
-  //   };
-
-  //Now with Async Await added
   handleSubmit = async () => {
     try {
-      await axios.post(`${ROOT_URL}/createUser`, { phone: this.state.phone });
-      await axios.post(`${ROOT_URL}/requestOneTimePassword`, {
-        phone: this.state.phone
+      let response = await axios.post(`${ROOT_URL}/verifyOneTimePassword`, {
+        phone: this.state.phone,
+        code: this.state.code
       });
+      console.log(response);
     } catch (err) {
       console.log(err);
     }
@@ -45,6 +33,13 @@ class SignInForm extends Component {
           <FormInput
             value={this.state.phone}
             onChangeText={phone => this.setState({ phone })}
+          />
+        </View>
+        <View style={{ marginBottom: 20 }}>
+          <FormLabel>Enter Code</FormLabel>
+          <FormInput
+            value={this.state.code}
+            onChangeText={code => this.setState({ code })}
           />
         </View>
         <Button onPress={this.handleSubmit} title="Submit" />
